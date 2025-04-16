@@ -15,7 +15,7 @@ export const addJob = async (req, res) => {
 
     const existingJob = await Job.findOne({ title, company });
     if (existingJob) {
-      return res.json({
+      return res.json({ success:false,
         message: "Job with this title already exists for this company",
       });
     }
@@ -33,13 +33,13 @@ export const addJob = async (req, res) => {
 
     await newJob.save();
 
-    res.json({
+    res.json({ success:true,
       message: "Job posted successfully",
       job: newJob,
     });
   } catch (error) {
     console.error("Error adding job:", error);
-    res.json({ message: "Error adding job:" });
+    res.json({success:false, message: "Error adding job:" });
   }
 };
 
