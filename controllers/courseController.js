@@ -9,20 +9,20 @@ export const addCourse = async (req, res) => {
     const { title, code, description, semester, department } = req.body;
 
     if (!code) {
-      return res.json({ message: "Course code is required" });
+      return res.json({success:false, message: "Course code is required" });
     }
 
     // Check if course already exists
     const existingCourse = await Course.findOne({ code });
     if (existingCourse) {
-      return res.json({ message: "Course with this code already exists" });
+      return res.json({ success:false, message: "Course with this code already exists" });
     }
 
     const subjectId=code;
     // Find faculty using the same unique code
     const faculty = await Faculty.findOne({subjectId});
     if (!faculty) {
-      return res.json({ message: "Faculty with this code not found" });
+      return res.json({ success:false, message: "Faculty with this code not found" });
     }
 
     // Create course
@@ -40,13 +40,13 @@ export const addCourse = async (req, res) => {
     faculty.courses.push(newCourse._id);
     await faculty.save();
 
-    res.status(201).json({
+    res.json({success:true,
       message: "Course added and linked to faculty successfully",
       course: newCourse,
     });
   } catch (error) {
     console.error("Error adding course:", error);
-    res.json({ message: "Error adding course:"});
+    res.json({success:false, message: "Error adding course:"});
   }
 };
 
