@@ -39,5 +39,5 @@ const AssessmentSchema = new Schema(
   { timestamps: true }
 );
 
-const Assessment = model("Assessment", AssessmentSchema);
+const Assessment = model("Assessment", assessmentSchema);
 export default Assessment;
