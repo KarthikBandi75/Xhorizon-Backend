@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
 
-const AssessmentSchema = new Schema(
+const assessmentSchema = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String },
