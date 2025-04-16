@@ -26,13 +26,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-const routes = ["http://localhost:5174", "http://localhost:5173"]
+const routes = [
+  "http://localhost:5174",
+  "http://localhost:5173",
+  "https://xhorizon-frontend.vercel.app"
+];
 app.use(
   cors({
     origin: routes,
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 
 //mongodb config .
